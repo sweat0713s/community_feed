@@ -1,6 +1,7 @@
 package org.fastcampus.post.domain;
 
 import org.fastcampus.common.domain.PositiveIntegerCounter;
+import org.fastcampus.post.domain.content.Content;
 import org.fastcampus.post.domain.content.PostContent;
 import org.fastcampus.post.domain.content.PostPublicationState;
 import org.fastcampus.user.domain.User;
@@ -43,5 +44,13 @@ public class Post {
 
         this.state = state;
         this.content.updateContent(updateContent);
+    }
+
+    public int getLikeCount() {
+        return likeCount.getCount();
+    }
+
+    public String getContent() {
+        return content.getContentText();
     }
 }
