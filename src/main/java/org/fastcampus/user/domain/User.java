@@ -72,4 +72,9 @@ public class User {
     public int followingCount() {
         return followingCount.getCount();
     }
+
+    public UserInfo getInfo() {
+        return userInfo;
+    }
+
 }

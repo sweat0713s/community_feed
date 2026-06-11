@@ -33,7 +33,7 @@ public class UserRelationService {
             throw new IllegalArgumentException();
         }
 
-        user.follow(targetUser);
+        user.unfollow(targetUser);
         userRelationRepository.delete(user, targetUser);
     }
 }
