@@ -7,8 +7,8 @@ public class UserInfo {
 
     public UserInfo(String name, String profileImageUrl) {
 
-        if (name == null && name.isEmpty()) {
-            throw new IllegalArgumentException("name is empty");
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException();
         }
         this.name = name;
         this.profileImageUrl = profileImageUrl;

@@ -7,15 +7,19 @@ import java.util.Objects;
 public class User {
 
     private final Long id;
-    private final UserInfo info;
+    private final UserInfo userInfo;
     private final PositiveIntegerCounter followingCount;
-    private final PositiveIntegerCounter followerCount;
+    private final PositiveIntegerCounter followerCounter;
 
-    public User(Long id, UserInfo info) {
+    public User(Long id, UserInfo userInfo) {
+        if (userInfo == null) {
+            throw new IllegalArgumentException();
+        }
+
         this.id = id;
-        this.info = info;
+        this.userInfo = userInfo;
         followingCount = new PositiveIntegerCounter();
-        followerCount = new PositiveIntegerCounter();
+        followerCounter = new PositiveIntegerCounter();
     }
 
     public void follow(User targetUser) {
@@ -38,11 +42,11 @@ public class User {
     }
 
     private void increaseFollowerCount() {
-        followerCount.increase();
+        followerCounter.increase();
     }
 
     private void decreaseFollowerCount() {
-        followerCount.decrease();
+        followerCounter.decrease();
     }
 
     @Override
@@ -55,5 +59,17 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public int followerCount() {
+        return followerCounter.getCount();
+    }
+
+    public int followingCount() {
+        return followingCount.getCount();
     }
 }
