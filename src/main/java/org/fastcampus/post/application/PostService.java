@@ -31,7 +31,7 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public Post updatePost(Long id, UpdatePostRequestDto dto) {
+    public Post updatePost(Long id, CreatePostRequestDto dto) {
         Post post = getPost(id);
         User user = userService.getUser(dto.userId());
 
