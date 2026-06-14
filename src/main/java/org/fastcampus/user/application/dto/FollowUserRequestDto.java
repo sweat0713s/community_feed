@@ -1,4 +1,4 @@
-package org.fastcampus.user.application.interfaces.dto;
+package org.fastcampus.user.application.dto;
 
 public record FollowUserRequestDto(Long userId, Long targetUserId) {
 }

@@ -6,7 +6,7 @@ import org.fastcampus.post.application.dto.CreatePostRequestDto;
 import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.content.PostPublicationState;
 import org.fastcampus.user.application.UserService;
-import org.fastcampus.user.application.interfaces.dto.CreateUserRequestDto;
+import org.fastcampus.user.application.dto.CreateUserRequestDto;
 import org.fastcampus.user.domain.User;
 
 public class PostApplicationTestTemplate {

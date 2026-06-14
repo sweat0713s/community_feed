@@ -1,8 +1,8 @@
 package org.fastcampus.user.application;
 
 import org.fastcampus.fake.FakeObjectFactory;
-import org.fastcampus.user.application.interfaces.dto.CreateUserRequestDto;
-import org.fastcampus.user.application.interfaces.dto.FollowUserRequestDto;
+import org.fastcampus.user.application.dto.CreateUserRequestDto;
+import org.fastcampus.user.application.dto.FollowUserRequestDto;
 import org.fastcampus.user.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
