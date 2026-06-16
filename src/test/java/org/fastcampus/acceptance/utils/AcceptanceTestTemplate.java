@@ -1,10 +1,12 @@
 package org.fastcampus.acceptance.utils;
 
+import org.fastcampus.auth.application.dto.LoginRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import static org.fastcampus.acceptance.steps.LoginAcceptanceSteps.requestLoginGetToken;
 import static org.springframework.boot.test.context.SpringBootTest.*;
 
 @ActiveProfiles("test")
@@ -37,6 +39,14 @@ public class AcceptanceTestTemplate {
 
     protected Long getUserId(String email) {
         return loader.getUserId(email);
+    }
+
+    protected void createUser(String email) {
+        loader.createUser(email);
+    }
+
+    protected String login(String email) {
+        return requestLoginGetToken(new LoginRequestDto(email, "password"));
     }
 
 }
