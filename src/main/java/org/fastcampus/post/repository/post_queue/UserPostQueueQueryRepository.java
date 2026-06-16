@@ -1,6 +1,5 @@
 package org.fastcampus.post.repository.post_queue;
 
-import org.fastcampus.post.ui.dto.GetContentResponseDto;
 import org.fastcampus.post.ui.dto.GetPostContentResponseDto;
 
 import java.util.List;
