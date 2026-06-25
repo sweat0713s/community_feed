@@ -54,3 +54,21 @@ ALTER TABLE community_feed.community_user DROP INDEX community_user_reg_dt_IDX;
 
 CREATE INDEX community_user_reg_date_IDX USING BTREE ON community_feed.community_user (reg_date);
 
+INSERT INTO community_user_auth (
+    email,
+    reg_dt,
+    upd_dt,
+    password,
+    role,
+    user_id,
+    last_login_dt
+)
+SELECT
+    CONCAT(name, id, '@test.com') AS email,
+    reg_dt,
+    upd_dt,
+    '1234' AS password,
+    'USER' AS role,
+    id AS user_id,
+    upd_dt AS last_login_dt
+FROM community_user;
