@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+
+<body>
+<div id="login-form">
+  <label for="email">이메일</label>
+  <input type="email" id="email" placeholder="Email">
+
+  <label for="password">비밀번호</label>
+  <input type="password" id="password" placeholder="Password">
+
+  <button onclick="handleLogin()">Login</button>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-messaging.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAchTX3D7P3unToxcd_4sQR3JoFlhmMx3c",
+    authDomain: "community-service-92190.firebaseapp.com",
+    projectId: "community-service-92190",
+    storageBucket: "community-service-92190.firebasestorage.app",
+    messagingSenderId: "513601535864",
+    appId: "1:513601535864:web:b010ff8501d6921eeb128d"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const messaging = getMessaging(app);
+
+  async function retrieveToken() {
+    try {
+      const permission = await Notification.requestPermission();
+
+      if (permission !== 'granted') {
+        console.warn("Notification permission not granted.");
+        return "";
+      }
+
+      const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+
+      const currentToken = await getToken(messaging, {
+        vapidKey: "BHacztRtzfBtn_t4s1snLeikAnBHD-ishqmEy1QXKTPMgrA6Vc50mgGnXBuEuiPJPKLxo7VS5b6nrmUawidR7yE",
+        serviceWorkerRegistration: registration
+      });
+
+      if (currentToken) {
+        console.log("FCM Token:", currentToken);
+        return currentToken;
+      }
+
+      console.warn("No registration token available.");
+      return "";
+    } catch (err) {
+      console.error("An error occurred while retrieving token: ", err);
+      return "";
+    }
+  }
+
+  async function login(fcmToken) {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password, fcmToken }),
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+  }
+
+  window.handleLogin = async function () {
+    const fcmToken = await retrieveToken();
+    await login(fcmToken);
+  };
+</script>
+</body>
+</html>
